@@ -1,8 +1,11 @@
 {
   "name": "gendiff0th0n",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Utitlity for calculate difference.",
   "main": "index.js",
+  "bin": {
+    "gendiff": "dist/bin/gendiff.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel-node": "babel-node",
@@ -13,6 +16,10 @@
   "files": [
     "dist"
   ],
+  "dependencies": {
+    "readline-sync": "^1.4.9",
+    "commander": "^2.19.0"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -23,7 +30,8 @@
     "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-babel": "^5.2.0"
+    "eslint-plugin-babel": "^5.2.0",
+    "commander": "^2.19.0"
   },
   "repository": {
     "type": "git",
