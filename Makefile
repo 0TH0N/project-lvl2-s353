@@ -5,10 +5,14 @@ publish:
 	npm publish
 
 lint:
-	npm run eslint
+	npx eslint .
 
 build:
+	rm -rf dist
 	npm run build
 
+test:
+	npm run test
+
 start-gendiff:
-	npm run babel-node -- src/bin/gendiff.js
+	npx babel-node -- src/bin/gendiff.js
