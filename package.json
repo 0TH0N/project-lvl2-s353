@@ -1,6 +1,6 @@
 {
   "name": "gendiff0th0n",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Utitlity for calculate difference.",
   "main": "index.js",
   "bin": {
