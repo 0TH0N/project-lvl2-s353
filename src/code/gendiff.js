@@ -23,7 +23,7 @@ const diffGen = ([head, ...rest], obj) => {
 
 const gendiff = (file1, file2) => {
   if (file1 && file2) {
-    const writeResultFile = './__tests__/__fixtures__/out/out_result';
+    // const writeResultFile = './__tests__/__fixtures__/out/out_result';
     const json1 = JSON.parse(fs.readFileSync(file1));
     const json2 = JSON.parse(fs.readFileSync(file2));
 
@@ -38,7 +38,7 @@ const gendiff = (file1, file2) => {
 
     const result = `{\n${result1}${diffResult}\n}`;
     console.log(result);
-    fs.writeFileSync(writeResultFile, result);
+    // fs.writeFileSync(writeResultFile, result);
     return result;
   }
 
