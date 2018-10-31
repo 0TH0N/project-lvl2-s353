@@ -1,13 +1,13 @@
 {
   "name": "gendiff0th0n",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "description": "Utitlity for calculate difference.",
   "main": "index.js",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
     "prepublishOnly": "npm run build",
     "eslint": "eslint --ignore-path .gitignore ."
@@ -15,6 +15,9 @@
   "files": [
     "dist"
   ],
+  "jest": {
+    "testEnvironment": "node"
+  },
   "dependencies": {
     "commander": "^2.19.0",
     "lodash": "^4.17.11"
@@ -24,6 +27,7 @@
     "@babel/core": "^7.1.2",
     "@babel/node": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "babel-preset-env": "^1.7.0",

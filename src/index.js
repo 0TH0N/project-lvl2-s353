@@ -1,10 +1,3 @@
+import gendiff from './code/gendiff';
 
-
-export const func = () => {
-
-};
-
-
-export const anotherFunc = () => {
-
-};
+export default gendiff;
