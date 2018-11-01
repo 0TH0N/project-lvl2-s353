@@ -1,38 +1,35 @@
+import fs from 'fs';
+import path from 'path';
 import _ from 'lodash';
 import parsers from './parsers';
 
 
 const gendiff = (filePath1, filePath2) => {
-  if (filePath1 && filePath2) {
-    // const writeResultFile = './__tests__/__fixtures__/out/out_result';
-    const parced1 = parsers(filePath1);
-    const parced2 = parsers(filePath2);
+  // const writeResultFile = './__tests__/__fixtures__/out/out_result';
+  const contentOfParsing1 = parsers(fs.readFileSync(filePath1, 'utf8'), path.extname(filePath1));
+  const contentOfParsing2 = parsers(fs.readFileSync(filePath2, 'utf8'), path.extname(filePath2));
+  const commonKeys = _.union(Object.keys(contentOfParsing1), Object.keys(contentOfParsing2));
 
-    const commonKeys = _.union(Object.keys(parced1), Object.keys(parced2));
+  const result = commonKeys.reduce((acc, key) => {
+    if ((key in contentOfParsing1) && (key in contentOfParsing2)
+      && (contentOfParsing1[key] === contentOfParsing2[key])) {
+      return `${acc}    ${key}: ${contentOfParsing1[key]},\n`;
+    }
+    if ((key in contentOfParsing1) && (key in contentOfParsing2)) {
+      return `${acc}  - ${key}: ${contentOfParsing1[key]},\n  + ${key}: ${contentOfParsing2[key]},\n`;
+    }
+    if (key in contentOfParsing1) {
+      return `${acc}  - ${key}: ${contentOfParsing1[key]},\n`;
+    }
+    if (key in contentOfParsing2) {
+      return `${acc}  + ${key}: ${contentOfParsing2[key]},\n`;
+    }
+    return `${acc}`;
+  }, '');
 
-    const result = commonKeys.reduce((acc, key) => {
-      if (parced1[key] !== undefined && parced2[key] !== undefined
-        && (parced1[key] === parced2[key])) {
-        return `${acc}    ${key}: ${parced1[key]},\n`;
-      }
-      if (parced1[key] !== undefined && parced2[key] !== undefined) {
-        return `${acc}  - ${key}: ${parced1[key]},\n  + ${key}: ${parced2[key]},\n`;
-      }
-      if (parced1[key] !== undefined) {
-        return `${acc}  - ${key}: ${parced1[key]},\n`;
-      }
-      if (parced2[key] !== undefined) {
-        return `${acc}  + ${key}: ${parced2[key]},\n`;
-      }
-      return `${acc}`;
-    }, '');
-
-    // console.log(`{\n${result.slice(0, -2)}\n}`);
-    // fs.writeFileSync(writeResultFile, result);
-    return `{\n${result.slice(0, -2)}\n}`;
-  }
-
-  return null;
+  // console.log(`{\n${result.slice(0, -2)}\n}`);
+  // fs.writeFileSync(writeResultFile, result);
+  return `{\n${result.slice(0, -2)}\n}`;
 };
 
 
