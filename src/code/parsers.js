@@ -1,22 +1,21 @@
+import { car, cdr } from 'hexlet-pairs';
 import yaml from 'js-yaml';
 import ini from 'ini';
 
 
-const parsers = (content, ext) => {
-  if (ext === '.json') {
-    return JSON.parse(content);
-  }
+const parsers = (content) => {
+  switch (car(content)) {
+    case '.json': return JSON.parse(cdr(content));
 
-  if (ext === '.yml') {
-    const yml = yaml.safeLoad(content);
-    return yml === null ? {} : yml;
-  }
+    case '.yml': {
+      const yml = yaml.safeLoad(cdr(content));
+      return yml === null ? {} : yml;
+    }
 
-  if (ext === '.ini') {
-    return ini.parse(content);
-  }
+    case '.ini': return ini.parse(cdr(content));
 
-  return null;
+    default: return null;
+  }
 };
 
 export default parsers;
