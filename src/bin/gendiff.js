@@ -5,11 +5,11 @@ import gendiff from '..';
 
 
 commander
-  .version('1.0.9')
+  .version('1.0.10')
   .usage('[options] <firstConfig> <secondConfig>')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'Output format')
-  .action((firstFile, secondFile) => {
-    gendiff(firstFile, secondFile);
+  .action((filePath1, filePath2) => {
+    gendiff(filePath1, filePath2);
   })
   .parse(process.argv);

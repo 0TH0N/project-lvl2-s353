@@ -14,5 +14,8 @@ build:
 test:
 	npm run test
 
+test-watch:
+	npm run test-watch
+
 start-gendiff:
 	npx babel-node -- src/bin/gendiff.js
