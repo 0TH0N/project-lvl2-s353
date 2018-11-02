@@ -66,3 +66,58 @@ describe('INI tests:', () => {
   test('Test INI gendiff N4', () => expect(gendiff(iniFilePath3, iniFilePath4))
     .toBe(fs.readFileSync(filePathToResult4, 'utf8').trim()));
 });
+
+
+const TreeFilePathToResult1 = './__tests__/__fixtures__/answers/tree1';
+const TreeFilePathToResult2 = './__tests__/__fixtures__/answers/tree2';
+const TreeFilePathToResult3 = './__tests__/__fixtures__/answers/tree3';
+const TreeFilePathToResult4 = './__tests__/__fixtures__/answers/tree4';
+
+
+const jsonEmptyFile = './__tests__/__fixtures__/in/json/file1.json';
+const jsonTreeFilePath1 = './__tests__/__fixtures__/in/json/tree1.json';
+const jsonTreeFilePath2 = './__tests__/__fixtures__/in/json/tree2.json';
+
+describe('JSON Tree tests:', () => {
+  test('Test JSON Tree gendiff N1', () => expect(gendiff(jsonEmptyFile, jsonEmptyFile))
+    .toBe(fs.readFileSync(TreeFilePathToResult1, 'utf8').trim()));
+  test('Test JSON Tree gendiff N2', () => expect(gendiff(jsonEmptyFile, jsonTreeFilePath2))
+    .toBe(fs.readFileSync(TreeFilePathToResult2, 'utf8').trim()));
+  test('Test JSON Tree gendiff N3', () => expect(gendiff(jsonTreeFilePath1, jsonEmptyFile))
+    .toBe(fs.readFileSync(TreeFilePathToResult3, 'utf8').trim()));
+  test('Test JSON Tree gendiff N4', () => expect(gendiff(jsonTreeFilePath1, jsonTreeFilePath2))
+    .toBe(fs.readFileSync(TreeFilePathToResult4, 'utf8').trim()));
+});
+
+
+const ymlEmptyFile = './__tests__/__fixtures__/in/yaml/file1.yml';
+const ymlTreeFilePath1 = './__tests__/__fixtures__/in/yaml/tree1.yml';
+const ymlTreeFilePath2 = './__tests__/__fixtures__/in/yaml/tree2.yml';
+
+describe('YML Tree tests:', () => {
+  test('Test YML Tree gendiff N1', () => expect(gendiff(ymlEmptyFile, ymlEmptyFile))
+    .toBe(fs.readFileSync(TreeFilePathToResult1, 'utf8').trim()));
+  test('Test YML Tree gendiff N2', () => expect(gendiff(ymlEmptyFile, ymlTreeFilePath2))
+    .toBe(fs.readFileSync(TreeFilePathToResult2, 'utf8').trim()));
+  test('Test YML Tree gendiff N3', () => expect(gendiff(ymlTreeFilePath1, ymlEmptyFile))
+    .toBe(fs.readFileSync(TreeFilePathToResult3, 'utf8').trim()));
+  test('Test YML Tree gendiff N4', () => expect(gendiff(ymlTreeFilePath1, ymlTreeFilePath2))
+    .toBe(fs.readFileSync(TreeFilePathToResult4, 'utf8').trim()));
+});
+
+
+const iniEmptyFile = './__tests__/__fixtures__/in/ini/file1.ini';
+const iniTreeFilePath1 = './__tests__/__fixtures__/in/ini/tree1.ini';
+const iniTreeFilePath2 = './__tests__/__fixtures__/in/ini/tree2.ini';
+const iniResultForTest2 = './__tests__/__fixtures__/answers/tree2ini';
+
+describe('INI Tree tests:', () => {
+  test('Test INI Tree gendiff N1', () => expect(gendiff(iniEmptyFile, iniEmptyFile))
+    .toBe(fs.readFileSync(TreeFilePathToResult1, 'utf8').trim()));
+  test('Test INI Tree gendiff N2', () => expect(gendiff(iniEmptyFile, iniTreeFilePath2))
+    .toBe(fs.readFileSync(iniResultForTest2, 'utf8').trim()));
+  test('Test INI Tree gendiff N3', () => expect(gendiff(iniTreeFilePath1, iniEmptyFile))
+    .toBe(fs.readFileSync(TreeFilePathToResult3, 'utf8').trim()));
+  test('Test INI Tree gendiff N4', () => expect(gendiff(iniTreeFilePath1, iniTreeFilePath2))
+    .toBe(fs.readFileSync(TreeFilePathToResult4, 'utf8').trim()));
+});

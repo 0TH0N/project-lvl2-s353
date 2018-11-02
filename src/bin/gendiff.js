@@ -2,12 +2,13 @@
 
 import commander from 'commander';
 import gendiff from '..';
+import { version, description } from '../../package.json';
 
 
 commander
-  .version('1.2.5')
+  .version(version)
   .usage('[options] <firstConfig> <secondConfig>')
-  .description('Compares two configuration files and shows a difference.')
+  .description(description)
   .option('-f, --format [type]', 'Output format')
   .action((filePath1, filePath2) => {
     console.log(gendiff(filePath1, filePath2));
