@@ -1,4 +1,3 @@
-import { cons } from 'hexlet-pairs';
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
@@ -7,8 +6,8 @@ import parsers from './parsers';
 
 const gendiff = (filePath1, filePath2) => {
   // const writeResultFile = './__tests__/__fixtures__/out/out_result';
-  const content1 = parsers(cons(path.extname(filePath1), fs.readFileSync(filePath1, 'utf8')));
-  const content2 = parsers(cons(path.extname(filePath2), fs.readFileSync(filePath2, 'utf8')));
+  const content1 = parsers.parse({ [path.extname(filePath1)]: fs.readFileSync(filePath1, 'utf8') });
+  const content2 = parsers.parse({ [path.extname(filePath2)]: fs.readFileSync(filePath2, 'utf8') });
   const commonKeys = _.union(Object.keys(content1), Object.keys(content2));
 
   const result = commonKeys.map((key) => {

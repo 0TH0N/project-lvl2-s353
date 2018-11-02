@@ -1,4 +1,3 @@
-import { car, cdr } from 'hexlet-pairs';
 import yaml from 'js-yaml';
 import ini from 'ini';
 
@@ -9,7 +8,12 @@ const mapping = {
   '.ini': item => ini.parse(item),
 };
 
-export default content => mapping[car(content)](cdr(content));
+
+const parse = data => mapping[Object.keys(data)[0]](data[Object.keys(data)[0]]);
+
+
+exports.parse = parse;
+
 /*
 const parsers = (content) => {
   switch (car(content)) {
