@@ -3,6 +3,14 @@ import yaml from 'js-yaml';
 import ini from 'ini';
 
 
+const mapping = {
+  '.json': item => JSON.parse(item),
+  '.yml': item => yaml.safeLoad(item) || {},
+  '.ini': item => ini.parse(item),
+};
+
+export default content => mapping[car(content)](cdr(content));
+/*
 const parsers = (content) => {
   switch (car(content)) {
     case '.json': return JSON.parse(cdr(content));
@@ -19,3 +27,4 @@ const parsers = (content) => {
 };
 
 export default parsers;
+*/
