@@ -46,7 +46,7 @@ const sipmleRender = (ast, currentDepth = 0) => {
     }
   });
 
-  return `{\n${result.filter(item => item !== '').join('\n')}\n${spaces}}`;
+  return `{\n${result.join('\n')}\n${spaces}}`;
 };
 
 

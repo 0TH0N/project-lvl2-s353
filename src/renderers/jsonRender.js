@@ -59,7 +59,7 @@ const jsonRender = (ast, currentDepth = 1) => {
     }
   });
 
-  const result = `{\n${tempResult.filter(item => item !== '').join(',\n')}\n${spaces}}`;
+  const result = `{\n${tempResult.join(',\n')}\n${spaces}}`;
   return result.slice(0, -3).concat('}');
 };
 
