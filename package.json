@@ -1,6 +1,6 @@
 {
   "name": "gendiff0th0n",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Compares two configuration files and shows a difference.",
   "main": "index.js",
   "bin": {
@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "commander": "^2.19.0",
-    "hexlet-pairs": "^1.0.8",
     "ini": "github:npm/ini",
     "js-yaml": "^3.12.0",
     "lodash": "^4.17.11"

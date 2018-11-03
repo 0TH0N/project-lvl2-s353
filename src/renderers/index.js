@@ -1,10 +1,12 @@
 import sipmleRender from './simpleRender';
 import plainRender from './plainRender';
+import jsonRender from './jsonRender';
 
 
 const mapping = {
   simple: sipmleRender,
   plain: plainRender,
+  json: jsonRender,
 };
 
 

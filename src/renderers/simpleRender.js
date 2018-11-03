@@ -36,11 +36,17 @@ const sipmleRender = (ast, currentDepth = 0) => {
         return `${spaces}    ${item.key}: ${oldValue}`;
       }
 
-      default: return `${spaces}    ${item.key}: ${sipmleRender(item.children, currentDepth + 1)}`;
+      case 'children': {
+        return `${spaces}    ${item.key}: ${sipmleRender(item.children, currentDepth + 1)}`;
+      }
+
+      default: {
+        return '';
+      }
     }
   });
 
-  return `{\n${result.join('\n')}\n${spaces}}`;
+  return `{\n${result.filter(item => item !== '').join('\n')}\n${spaces}}`;
 };
 
 

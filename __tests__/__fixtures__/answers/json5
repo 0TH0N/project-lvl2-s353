@@ -1,0 +1,74 @@
+{
+  "common": {
+    "setting1": {
+      "Status": "notChanged",
+      "oldValue": "Value 1"
+    },
+    "setting2": {
+      "Status": "removed",
+      "oldValue": "200"
+    },
+    "setting3": {
+      "Status": "changed",
+      "oldValue": true,
+      "newValue": {
+        "key": "value"
+      }
+    },
+    "setting6": {
+      "key": {
+        "Status": "notChanged",
+        "oldValue": "value"
+      },
+      "ops": {
+        "Status": "added",
+        "newValue": "vops"
+      }
+    },
+    "follow": {
+      "Status": "added",
+      "newValue": false
+    },
+    "setting4": {
+      "Status": "added",
+      "newValue": "blah blah"
+    },
+    "setting5": {
+      "Status": "added",
+      "newValue": {
+        "key5": "value5"
+      }
+    }
+  },
+  "group1": {
+    "baz": {
+      "Status": "changed",
+      "oldValue": "bas",
+      "newValue": "bars"
+    },
+    "foo": {
+      "Status": "notChanged",
+      "oldValue": "bar"
+    },
+    "nest": {
+      "Status": "changed",
+      "oldValue": {
+        "key": "value"
+      },
+      "newValue": "str"
+    }
+  },
+  "group2": {
+    "Status": "removed",
+    "oldValue": {
+      "abc": "12345"
+    }
+  },
+  "group3": {
+    "Status": "added",
+    "newValue": {
+      "fee": "100500"
+    }
+  }
+}
+

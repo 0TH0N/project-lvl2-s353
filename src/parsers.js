@@ -5,14 +5,18 @@ import ini from 'ini';
 const mapping = {
   '.json': JSON.parse,
   '.yml': yaml.safeLoad,
+  '.yaml': yaml.safeLoad,
   '.ini': ini.parse,
 };
 
 
-const parse = (ext, data) => {
-  const parser = mapping[ext];
-  return parser(data) || {};
+const getParser = (ext, data) => {
+  const parse = mapping[ext];
+  if (ext === '.yml' || ext === '.yaml') {
+    return parse(data) || {};
+  }
+  return parse(data);
 };
 
 
-export default parse;
+export default getParser;

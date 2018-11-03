@@ -1,6 +1,6 @@
 
 
-const plainRender = (ast) => {
+const plainRender = (ast, ancestors = '') => {
   const result = ast.map((item) => {
     const tempOldValue = typeof item.oldValue === 'string' ? `'${item.oldValue}'` : item.oldValue;
     const oldValue = tempOldValue instanceof Object
@@ -8,8 +8,7 @@ const plainRender = (ast) => {
     const tempNewValue = typeof item.newValue === 'string' ? `'${item.newValue}'` : item.newValue;
     const newValue = tempNewValue instanceof Object
       ? '[complex value]' : tempNewValue;
-    const ancestors = item.ancestors === '' ? '' : `${item.ancestors}.`;
-    const fullName = `${ancestors}${item.key}`;
+    const fullName = ancestors === '' ? item.key : `${ancestors}.${item.key}`;
     switch (item.condition) {
       case 'removed': {
         return `Property '${fullName}' was removed`;
@@ -27,8 +26,12 @@ const plainRender = (ast) => {
         return '';
       }
 
+      case 'children': {
+        return plainRender(item.children, fullName);
+      }
+
       default: {
-        return plainRender(item.children);
+        return '';
       }
     }
   });
