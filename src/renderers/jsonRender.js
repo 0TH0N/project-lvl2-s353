@@ -54,7 +54,7 @@ const jsonRender = (ast, currentDepth = 1) => {
         return `${spaces}"${item.key}": ${jsonRender(item.children, currentDepth + 1)}`;
       }
       default: {
-        return '';
+        throw item;
       }
     }
   });

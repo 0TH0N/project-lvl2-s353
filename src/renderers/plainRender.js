@@ -31,7 +31,7 @@ const plainRender = (ast, ancestors = '') => {
       }
 
       default: {
-        return '';
+        throw item;
       }
     }
   });

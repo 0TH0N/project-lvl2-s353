@@ -41,7 +41,7 @@ const sipmleRender = (ast, currentDepth = 0) => {
       }
 
       default: {
-        return '';
+        throw item;
       }
     }
   });
