@@ -11,6 +11,10 @@ commander
   .description(description)
   .option('-f, --format [type]', 'Output format')
   .action((filePath1, filePath2) => {
-    console.log(gendiff(filePath1, filePath2));
+    if (commander.format === 'plain') {
+      console.log(gendiff(filePath1, filePath2, 'plain'));
+    } else {
+      console.log(gendiff(filePath1, filePath2));
+    }
   })
   .parse(process.argv);

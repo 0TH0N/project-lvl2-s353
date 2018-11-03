@@ -121,3 +121,23 @@ describe('INI Tree tests:', () => {
   test('Test INI Tree gendiff N4', () => expect(gendiff(iniTreeFilePath1, iniTreeFilePath2))
     .toBe(fs.readFileSync(TreeFilePathToResult4, 'utf8').trim()));
 });
+
+
+const plainPathToResult1 = './__tests__/__fixtures__/answers/plain1';
+const plainPathToResult2 = './__tests__/__fixtures__/answers/plain2';
+const plainPathToResult3 = './__tests__/__fixtures__/answers/plain3';
+const plainPathToResult4 = './__tests__/__fixtures__/answers/plain4';
+const plainPathToResult5 = './__tests__/__fixtures__/answers/plain5';
+
+describe('Plain render tests:', () => {
+  test('Test N1. Plain render with empty files.', () => expect(gendiff(jsonFilePath1, jsonFilePath2, 'plain'))
+    .toBe(fs.readFileSync(plainPathToResult1, 'utf8').trim()));
+  test('Test N2. Plain render simple files.', () => expect(gendiff(jsonFilePath3, jsonFilePath4, 'plain'))
+    .toBe(fs.readFileSync(plainPathToResult2, 'utf8').trim()));
+  test('Test N3. Plain render with empty second file.', () => expect(gendiff(jsonTreeFilePath1, jsonFilePath1, 'plain'))
+    .toBe(fs.readFileSync(plainPathToResult3, 'utf8').trim()));
+  test('Test N4. Plain render with empty first file.', () => expect(gendiff(jsonFilePath1, jsonTreeFilePath2, 'plain'))
+    .toBe(fs.readFileSync(plainPathToResult4, 'utf8').trim()));
+  test('Test N5. Plain render with tree files.', () => expect(gendiff(jsonTreeFilePath1, jsonTreeFilePath2, 'plain'))
+    .toBe(fs.readFileSync(plainPathToResult5, 'utf8').trim()));
+});
