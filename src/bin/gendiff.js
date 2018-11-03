@@ -9,12 +9,8 @@ commander
   .version(version)
   .usage('[options] <firstConfig> <secondConfig>')
   .description(description)
-  .option('-f, --format [type]', 'Output format')
+  .option('-f, --format [type]', 'Output format', 'simple')
   .action((filePath1, filePath2) => {
-    if (commander.format === 'plain') {
-      console.log(gendiff(filePath1, filePath2, 'plain'));
-    } else {
-      console.log(gendiff(filePath1, filePath2));
-    }
+    console.log(gendiff(filePath1, filePath2, commander.format));
   })
   .parse(process.argv);

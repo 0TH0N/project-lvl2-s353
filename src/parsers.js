@@ -9,10 +9,9 @@ const mapping = {
 };
 
 
-const parse = (data) => {
-  const extKey = Object.keys(data)[0];
-  const parser = mapping[extKey];
-  return parser(data[extKey]) || {};
+const parse = (ext, data) => {
+  const parser = mapping[ext];
+  return parser(data) || {};
 };
 
 

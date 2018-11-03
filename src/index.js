@@ -1,22 +1,18 @@
 import fs from 'fs';
 import path from 'path';
-import parse from './code/parsers';
-import render from './code/renders';
-import buildAst from './code/buildAst';
+import parse from './parsers';
+import render from './renderers/render';
+import buildAst from './buildAst';
 
 
 const gendiff = (filePath1, filePath2, format) => {
-  const content1 = parse({ [path.extname(filePath1)]: fs.readFileSync(filePath1, 'utf8') });
-  const content2 = parse({ [path.extname(filePath2)]: fs.readFileSync(filePath2, 'utf8') });
-  switch (format) {
-    case 'plain': {
-      return render(buildAst(content1, content2), format);
-    }
-
-    default: {
-      return render(buildAst(content1, content2));
-    }
-  }
+  const ext1 = path.extname(filePath1);
+  const data1 = fs.readFileSync(filePath1, 'utf8');
+  const content1 = parse(ext1, data1);
+  const ext2 = path.extname(filePath2);
+  const data2 = fs.readFileSync(filePath2, 'utf8');
+  const content2 = parse(ext2, data2);
+  return render(buildAst(content1, content2), format);
 };
 
 
