@@ -18,7 +18,7 @@ const mapping = {
 const plainRender = (ast, ancestors = '') => {
   const result = ast.map((item) => {
     const fullName = ancestors === '' ? item.key : `${ancestors}.${item.key}`;
-    return mapping[item.condition](fullName, item, plainRender);
+    return mapping[item.type](fullName, item, plainRender);
   });
 
   return result.filter(item => item !== '').join('\n');

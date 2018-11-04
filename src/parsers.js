@@ -12,9 +12,6 @@ const mapping = {
 
 const parse = (ext, data) => {
   const parseData = mapping[ext];
-  if (ext === '.yml' || ext === '.yaml') {
-    return parseData(data) || {};
-  }
   return parseData(data);
 };
 

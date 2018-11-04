@@ -1,3 +1,4 @@
+import _ from 'lodash';
 
 
 const objToString = (item, currentDepth) => {
@@ -19,7 +20,8 @@ const remakeValue = (value, currentDepth) => (value instanceof Object
 const mapping = {
   removed: (spaces, item, currentDepth) => `${spaces}  - ${item.key}: ${remakeValue(item.oldValue, currentDepth)}`,
   added: (spaces, item, currentDepth) => `${spaces}  + ${item.key}: ${remakeValue(item.newValue, currentDepth)}`,
-  changed: (spaces, item, currentDepth) => `${spaces}  - ${item.key}: ${remakeValue(item.oldValue, currentDepth)}\n${spaces}  + ${item.key}: ${remakeValue(item.newValue, currentDepth)}`,
+  changed: (spaces, item, currentDepth) => [`${spaces}  - ${item.key}: ${remakeValue(item.oldValue, currentDepth)}`,
+    `${spaces}  + ${item.key}: ${remakeValue(item.newValue, currentDepth)}`],
   notChanged: (spaces, item, currentDepth) => `${spaces}    ${item.key}: ${remakeValue(item.oldValue, currentDepth)}`,
   children: (spaces, item, currentDepth, sipmleRender) => `${spaces}    ${item.key}: ${sipmleRender(item.children, currentDepth + 1)}`,
 };
@@ -27,7 +29,8 @@ const mapping = {
 
 const sipmleRender = (ast, currentDepth = 0) => {
   const spaces = '    '.repeat(currentDepth);
-  const result = ast.map(item => mapping[item.condition](spaces, item, currentDepth, sipmleRender));
+  const result = _.flatten(ast.map(item => mapping[item.type](spaces,
+    item, currentDepth, sipmleRender)));
   return `{\n${result.join('\n')}\n${spaces}}`;
 };
 
