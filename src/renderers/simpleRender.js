@@ -12,40 +12,22 @@ const objToString = (item, currentDepth) => {
 };
 
 
+const remakeValue = (value, currentDepth) => (value instanceof Object
+  ? objToString(value, currentDepth + 1) : value);
+
+
+const mapping = {
+  removed: (spaces, item, currentDepth) => `${spaces}  - ${item.key}: ${remakeValue(item.oldValue, currentDepth)}`,
+  added: (spaces, item, currentDepth) => `${spaces}  + ${item.key}: ${remakeValue(item.newValue, currentDepth)}`,
+  changed: (spaces, item, currentDepth) => `${spaces}  - ${item.key}: ${remakeValue(item.oldValue, currentDepth)}\n${spaces}  + ${item.key}: ${remakeValue(item.newValue, currentDepth)}`,
+  notChanged: (spaces, item, currentDepth) => `${spaces}    ${item.key}: ${remakeValue(item.oldValue, currentDepth)}`,
+  children: (spaces, item, currentDepth, sipmleRender) => `${spaces}    ${item.key}: ${sipmleRender(item.children, currentDepth + 1)}`,
+};
+
+
 const sipmleRender = (ast, currentDepth = 0) => {
   const spaces = '    '.repeat(currentDepth);
-  const result = ast.map((item) => {
-    const oldValue = item.oldValue instanceof Object
-      ? objToString(item.oldValue, currentDepth + 1) : item.oldValue;
-    const newValue = item.newValue instanceof Object
-      ? objToString(item.newValue, currentDepth + 1) : item.newValue;
-    switch (item.condition) {
-      case 'removed': {
-        return `${spaces}  - ${item.key}: ${oldValue}`;
-      }
-
-      case 'added': {
-        return `${spaces}  + ${item.key}: ${newValue}`;
-      }
-
-      case 'changed': {
-        return `${spaces}  - ${item.key}: ${oldValue}\n${spaces}  + ${item.key}: ${newValue}`;
-      }
-
-      case 'notChanged': {
-        return `${spaces}    ${item.key}: ${oldValue}`;
-      }
-
-      case 'children': {
-        return `${spaces}    ${item.key}: ${sipmleRender(item.children, currentDepth + 1)}`;
-      }
-
-      default: {
-        throw item;
-      }
-    }
-  });
-
+  const result = ast.map(item => mapping[item.condition](spaces, item, currentDepth, sipmleRender));
   return `{\n${result.join('\n')}\n${spaces}}`;
 };
 

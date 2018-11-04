@@ -10,13 +10,13 @@ const mapping = {
 };
 
 
-const getParser = (ext, data) => {
-  const parse = mapping[ext];
+const parse = (ext, data) => {
+  const parseData = mapping[ext];
   if (ext === '.yml' || ext === '.yaml') {
-    return parse(data) || {};
+    return parseData(data) || {};
   }
-  return parse(data);
+  return parseData(data);
 };
 
 
-export default getParser;
+export default parse;

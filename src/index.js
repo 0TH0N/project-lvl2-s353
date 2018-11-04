@@ -1,17 +1,20 @@
 import fs from 'fs';
 import path from 'path';
-import getParser from './parsers';
+import parse from './parsers';
 import render from './renderers';
 import buildAst from './buildAst';
 
 
+const readContent = (filePath) => {
+  const ext = path.extname(filePath);
+  const data = fs.readFileSync(filePath, 'utf8');
+  return parse(ext, data);
+};
+
+
 const gendiff = (filePath1, filePath2, format) => {
-  const ext1 = path.extname(filePath1);
-  const data1 = fs.readFileSync(filePath1, 'utf8');
-  const content1 = getParser(ext1, data1);
-  const ext2 = path.extname(filePath2);
-  const data2 = fs.readFileSync(filePath2, 'utf8');
-  const content2 = getParser(ext2, data2);
+  const content1 = readContent(filePath1);
+  const content2 = readContent(filePath2);
   return render(buildAst(content1, content2), format);
 };
 
