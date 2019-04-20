@@ -9,13 +9,16 @@ Possible show formats:
 
 For use please install this package from NPM how global. Name for packet "gendiff0th0n".
 
-Usage: gendiff [options] <firstConfig> <secondConfig>
+Usage: gendiff [options] firstConfig secondConfig
 
 Compares two configuration files and shows a difference.
 
 Options:
+
   -V, --version        output the version number
+
   -f, --format [type]  Output format (default: "simple")
+
   -h, --help           output usage information
 
 
