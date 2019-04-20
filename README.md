@@ -1,5 +1,11 @@
 This is readme for my training project "gendiff" in Hexlet courses.
 
+Important learned themes:
+
+1) Abstract syntax tree.
+2) Data-driven programming.
+3) Utitity for command line "commander.js".
+
 This program calc and show difference between configuration contents from two files (json, yml and ini formats).
 
 Possible show formats:
